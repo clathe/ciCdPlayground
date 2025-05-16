@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,33 +22,9 @@ jobs:
           yarn install
           yarn build
 
-  unit-tests:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js and Yarn
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
       - name: Run unit tests
         run: |
           yarn test
-
-  e2e-tests:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js and Yarn
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
 
       - name: Run E2E tests
         run: |
